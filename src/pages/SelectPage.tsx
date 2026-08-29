@@ -1,15 +1,19 @@
 import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
 import {requestGalleryData} from "../features/gallery/galleryThunks.ts";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import DogDetails from "../components/DogDetails.tsx";
 import {Link} from "react-router-dom";
+import {changeSelectedAction} from "../features/gallery/galleryActions.ts";
 
 function SelectPage() {
 
     const dispatch = useAppDispatch()
-    const {status, data, error} = useAppSelector(state => state.gallery)
-    const [selectedDog, setSelectedDog] = useState<string>('')
-    const selectedBreed = data?.find(dog => dog.id === selectedDog)
+    const {selected, status, data, error} = useAppSelector(state => state.gallery)
+    const selectedBreed = data?.find(dog => dog.id === selected)
+
+    function handleSelectDog(newSelected: string) {
+        dispatch(changeSelectedAction(newSelected))
+    }
 
     useEffect(() => {
         if (status === 'idle') {
@@ -24,7 +28,7 @@ function SelectPage() {
     } else {
         return (
             <div>
-                <select value={selectedDog} onChange={(e) => setSelectedDog(e.target.value)}>
+                <select value={selected} onChange={(e) => handleSelectDog(e.target.value)}>
                     <option disabled={true} value={''}>
                         Choose the dog
                     </option>
@@ -37,7 +41,7 @@ function SelectPage() {
                 {selectedBreed && (
                     <>
                         <DogDetails dogBreedData={selectedBreed}/>
-                        <Link to={`/select/dogcard/${selectedDog}`}>
+                        <Link to={`/select/dogcard/${selected}`}>
                             Open full page
                         </Link>
                     </>

@@ -5,9 +5,11 @@ export const GALLERY_SHOW_SUCCESS = 'gallery/showSuccess'
 export const GALLERY_SHOW_ERROR = 'gallery/showError'
 export const GALLERY_RESET = 'gallery/reset'
 export const GALLERY_CHANGE_PAGE = 'gallery/changePage'
+export const GALLERY_CHANGE_SELECTED = 'gallery/changeSelected'
 
 export type GalleryState = {
     pageNum: number;
+    selected: string;
     status: RequestStatus;
     data: Array<DogBreed> | null;
     error: string | null;
@@ -31,7 +33,11 @@ export type ChangePageAction = {
     type: typeof GALLERY_CHANGE_PAGE;
     payload: number;
 }
-export type GalleryAction = ShowLoadingAction | ShowSuccessAction | ShowErrorAction | ResetAction | ChangePageAction
+export type ChangeSelectedAction = {
+    type: typeof GALLERY_CHANGE_SELECTED;
+    payload: string;
+}
+export type GalleryAction = ShowLoadingAction | ShowSuccessAction | ShowErrorAction | ResetAction | ChangePageAction | ChangeSelectedAction
 
 export function showLoadingAction(): ShowLoadingAction {
     return {type: GALLERY_SHOW_LOADING}
@@ -51,4 +57,8 @@ export function resetAction(): ResetAction {
 
 export function changePageAction(pageNum: number): ChangePageAction {
     return {type: GALLERY_CHANGE_PAGE, payload: pageNum}
+}
+
+export function changeSelectedAction(selected: string): ChangeSelectedAction {
+    return {type: GALLERY_CHANGE_SELECTED, payload: selected}
 }
