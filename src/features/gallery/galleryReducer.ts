@@ -1,4 +1,5 @@
 import {
+    GALLERY_CHANGE_PAGE,
     GALLERY_RESET,
     GALLERY_SHOW_ERROR,
     GALLERY_SHOW_LOADING,
@@ -8,7 +9,7 @@ import {
 } from "./galleryActions.ts";
 
 const initialGalleryState: GalleryState = {
-    status: 'idle', data: null, error: null
+    pageNum: 1, status: 'idle', data: null, error: null
 }
 
 export function galleryReducer(
@@ -24,6 +25,8 @@ export function galleryReducer(
             return {...state, status: 'error', data: null, error: action.payload}
         case GALLERY_RESET:
             return {...initialGalleryState}
+        case GALLERY_CHANGE_PAGE:
+            return {...state, pageNum: action.payload}
         default:
             return state
     }

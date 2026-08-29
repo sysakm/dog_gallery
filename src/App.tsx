@@ -3,6 +3,7 @@ import AppLayout from "./AppLayout.tsx";
 import GalleryPage from "./pages/GalleryPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
+import DogCardPage from "./pages/DogCardPage.tsx";
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
                 <Route index element={<Navigate to='/home' replace/>}/>
                 <Route path='/home' element={<HomePage/>}/>
                 <Route path='/gallery' element={<GalleryPage/>}/>
+                <Route path='/dogcard/:dogId' element={<DogCardPage/>}/>
                 <Route path='*' element={<NotFoundPage/>}/>
             </Route>
         </Routes>

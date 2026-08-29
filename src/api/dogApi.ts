@@ -29,7 +29,7 @@ function mapBreed(breed: TheDogApiBreed): DogBreed {
         description: formatValue(breed.bred_for),
         origin: formatValue(breed.origin),
         breedGroup: formatValue(breed.breed_group),
-        lifeSpan: formatValue(breed.life_span),
+        lifeSpan: formatMetricRange(breed.life_span, 'years'),
         weight: formatMetricRange(breed.weight?.metric, 'kg'),
         height: formatMetricRange(breed.height?.metric, 'cm'),
         temperament: formatValue(breed.temperament),
@@ -47,7 +47,7 @@ export async function fetchBreeds(): Promise<Array<DogBreed>> {
         if (axios.isAxiosError<TheDogApiError>(error)) {
             if (error.response) {
                 const eData = error.response.data
-                throw new Error(`${eData.statusCode }${eData.error}: ${eData.message}`);
+                throw new Error(`${eData.statusCode }-${eData.error}: ${eData.message}`);
             }
         }
         throw new Error('TheDogApi request failed - something went wrong');
