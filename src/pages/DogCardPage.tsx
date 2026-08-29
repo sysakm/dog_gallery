@@ -2,7 +2,10 @@ import DogCard from "../components/DogCard.tsx";
 
 function DogCardPage() {
     return (
-        <DogCard/>
+        <>
+            <h2>Full dog card</h2>
+            <DogCard/>
+        </>
     )
 }
 

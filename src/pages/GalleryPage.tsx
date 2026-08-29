@@ -20,7 +20,10 @@ function GalleryPage() {
         return <p><strong>{error}</strong></p>
     } else {
         return (
-            <DogGallery/>
+            <>
+                <h2>Full gallery</h2>
+                <DogGallery/>
+            </>
         )
     }
 }

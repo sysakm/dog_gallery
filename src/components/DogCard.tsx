@@ -19,10 +19,11 @@ function DogCard() {
     if (status !== 'success' || !data) {
         return <p>Need full dog data loaded to display individual dog profile.</p>
     }
-    if (from !== 'gallery' && from !== 'select') {
+    if (from !== 'gallery' && from !== 'select' && from !== 'home') {
         return (
             <>
                 <p>Unknown card source</p>
+                <Link to={`/home/dogcard/${dogId}`} replace>Go to home</Link>
                 <Link to={`/select/dogcard/${dogId}`} replace>Go to select gallery</Link>
                 <Link to={`/gallery/dogcard/${dogId}`} replace>Go to full gallery</Link>
             </>

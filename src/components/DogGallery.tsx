@@ -36,7 +36,6 @@ function DogGallery() {
 
     return (
         <div>
-            <h2>Full gallery</h2>
             <div>
                 {Math.min(...buttonNumberArray) > 1 && <>
                     <button
@@ -71,7 +70,7 @@ function DogGallery() {
             </div>
             <div>
                 {currentData.map(dog => (
-                    <DogGalleryEntry key={`dog-picture-${dog.id}`} dog={dog}/>
+                    <DogGalleryEntry key={`dog-picture-${dog.id}`} from='gallery' dog={dog}/>
                 ))}
             </div>
         </div>

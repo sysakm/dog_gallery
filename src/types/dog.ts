@@ -4,6 +4,7 @@ export type DogBreed = {
     id: string;
     name: string;
     description: string;
+    history: string;
     origin: string;
     breedGroup: string;
     lifeSpan: string;
@@ -16,7 +17,8 @@ export type DogBreed = {
 export type TheDogApiBreed = {
     id: number;
     name: string;
-    bred_for?: string;
+    description?: string;
+    history?: string;
     breed_group?: string;
     life_span?: string;
     temperament?: string;

@@ -26,7 +26,8 @@ function mapBreed(breed: TheDogApiBreed): DogBreed {
     return {
         id: String(breed.id),
         name: breed.name,
-        description: formatValue(breed.bred_for),
+        description: formatValue(breed.description),
+        history: formatValue(breed.history),
         origin: formatValue(breed.origin),
         breedGroup: formatValue(breed.breed_group),
         lifeSpan: formatMetricRange(breed.life_span, 'years'),

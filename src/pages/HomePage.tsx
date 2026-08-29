@@ -1,7 +1,10 @@
+import FavoritesGallery from "../components/FavoritesGallery.tsx";
+
 function HomePage() {
     return (
         <>
-            Home Page
+            <h2>Home page</h2>
+            <FavoritesGallery/>
         </>
     )
 }
