@@ -1,26 +1,17 @@
-import type {DogBreed, RequestStatus} from "../types/dog.ts";
-import {useState} from "react";
-import {fetchBreeds} from "../api/dogApi.ts";
+import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
+import {requestGalleryData} from "../features/gallery/galleryThunks.ts";
+import {useEffect} from "react";
 
 function GalleryPage() {
 
-    const [status, setStatus] = useState<RequestStatus>('idle')
-    const [data, setData] = useState<Array<DogBreed>>([])
-    const [error, setError] = useState<string>('')
+    const dispatch = useAppDispatch()
+    const {status, data, error} = useAppSelector(state => state.gallery)
 
-    async function handleRequest() {
-        setStatus('loading')
-        try {
-            const data = await fetchBreeds()
-            setStatus('success')
-            setData(data)
-            setError('')
-        } catch (error) {
-            setStatus('error')
-            setData([])
-            setError(error instanceof Error ? error.message : 'Something went wrong')
+    useEffect(() => {
+        if (status === 'idle') {
+            void dispatch(requestGalleryData())
         }
-    }
+    }, [dispatch, status])
 
     return (
         <>
@@ -34,7 +25,6 @@ function GalleryPage() {
             <div>
                 {error}
             </div>
-            <button type='button' onClick={handleRequest}>Load</button>
         </>
     )
 }

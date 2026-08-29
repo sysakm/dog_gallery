@@ -7,6 +7,9 @@ const dogApi = axios.create({
     baseURL: DOG_API_BASE_URL,
     timeout: 5000,
     headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
         'x-api-key': import.meta.env.VITE_DOG_API_KEY ?? ''
     }
 })
