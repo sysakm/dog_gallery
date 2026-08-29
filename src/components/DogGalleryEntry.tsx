@@ -10,13 +10,22 @@ type Props = {
 
 function DogGalleryEntry({from, dog}: Props) {
     return (
-        <div>
-            <FavoritesButton dogId={dog.id}/>
-            <Link to={`/${from}/dogcard/${dog.id}`}>
-                <h5>#{dog.id} {dog.name} (group {dog.breedGroup})</h5>
-                <DogImage src={dog.mainImageUrl} name={dog.name}/>
+        <article className='dog-card'>
+            <div className='dog-card__media'>
+                <Link
+                    className='dog-card__image-link'
+                    to={`/${from}/dogcard/${dog.id}`}
+                    aria-label={`Open details for ${dog.name}`}
+                >
+                    <DogImage src={dog.mainImageUrl} name={dog.name}/>
+                </Link>
+                <FavoritesButton dogId={dog.id}/>
+            </div>
+            <Link className='dog-card__content' to={`/${from}/dogcard/${dog.id}`}>
+                <span className='dog-card__eyebrow'>#{dog.id} · {dog.breedGroup}</span>
+                <h3>{dog.name}</h3>
             </Link>
-        </div>
+        </article>
     )
 }
 

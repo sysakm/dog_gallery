@@ -15,15 +15,19 @@ function GalleryPage() {
     }, [dispatch, status])
 
     if (status === 'idle' || status === 'loading') {
-        return <p>Loading...</p>
+        return <p className='state-message state-message--loading'>Loading...</p>
     } else if (status === 'error') {
-        return <p><strong>{error}</strong></p>
+        return <p className='state-message state-message--error'><strong>{error}</strong></p>
     } else {
         return (
-            <>
-                <h2>Full gallery</h2>
+            <section className='page'>
+                <div className='page-heading'>
+                    <p className='page-heading__eyebrow'>Browse every breed</p>
+                    <h1>Full gallery</h1>
+                    <p>Explore the complete collection and save the dogs you love.</p>
+                </div>
                 <DogGallery/>
-            </>
+            </section>
         )
     }
 }

@@ -38,20 +38,22 @@ function DogGallery() {
     }
 
     return (
-        <div>
-            <div>
+        <section className='gallery-section' aria-label='All dog breeds'>
+            <div className='pagination' aria-label='Gallery pages'>
                 {Math.min(...buttonNumberArray) > 1 && <>
                     <button
+                        className='pagination__button'
                         key={`gallery-button-${1}`}
                         type='button'
                         onClick={() => handlePageChange(1)}
                     >
                         {1}
                     </button>
-                    {Math.min(...buttonNumberArray) > 2 && <span>...</span>}
+                    {Math.min(...buttonNumberArray) > 2 && <span className='pagination__ellipsis'>...</span>}
                 </>}
                 {buttonNumberArray.map(item => (
                     <button
+                        className='pagination__button'
                         key={`gallery-button-${item}`}
                         type='button'
                         onClick={() => handlePageChange(item)}
@@ -61,8 +63,9 @@ function DogGallery() {
                     </button>
                 ))}
                 {Math.max(...buttonNumberArray) < totalPages && <>
-                    {Math.max(...buttonNumberArray) < totalPages - 1 && <span>...</span>}
+                    {Math.max(...buttonNumberArray) < totalPages - 1 && <span className='pagination__ellipsis'>...</span>}
                     <button
+                        className='pagination__button'
                         key={`gallery-button-${totalPages}`}
                         type='button'
                         onClick={() => handlePageChange(totalPages)}
@@ -71,12 +74,12 @@ function DogGallery() {
                     </button>
                 </>}
             </div>
-            <div>
+            <div className='dog-grid'>
                 {currentData.map(dog => (
                     <DogGalleryEntry key={`dog-picture-${dog.id}`} from='gallery' dog={dog}/>
                 ))}
             </div>
-        </div>
+        </section>
     )
 }
 

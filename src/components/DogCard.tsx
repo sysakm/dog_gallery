@@ -17,30 +17,34 @@ function DogCard() {
     }, [status, dispatch])
 
     if (status !== 'success' || !data) {
-        return <p>Need full dog data loaded to display individual dog profile.</p>
+        return <p className='state-message'>Need full dog data loaded to display individual dog profile.</p>
     }
     if (from !== 'gallery' && from !== 'select' && from !== 'home') {
         return (
-            <>
+            <section className='state-message'>
                 <p>Unknown card source</p>
-                <Link to={`/home/dogcard/${dogId}`} replace>Go to home</Link>
-                <Link to={`/select/dogcard/${dogId}`} replace>Go to select gallery</Link>
-                <Link to={`/gallery/dogcard/${dogId}`} replace>Go to full gallery</Link>
-            </>
+                <div className='link-group'>
+                    <Link className='action-link' to={`/home/dogcard/${dogId}`} replace>Go to home</Link>
+                    <Link className='action-link' to={`/select/dogcard/${dogId}`} replace>Go to select gallery</Link>
+                    <Link className='action-link' to={`/gallery/dogcard/${dogId}`} replace>Go to full gallery</Link>
+                </div>
+            </section>
         )
     }
 
     const dogBreedData = data.find(dog => dog.id === dogId)
     if (!dogBreedData) {
-        return <p>Could not find dog with ID {dogId} in data...</p>
+        return <p className='state-message'>Could not find dog with ID {dogId} in data...</p>
     } else {
         return (
-            <>
-                <Link to={`/${from}`}>
-                    Back to {from}
-                </Link>
+            <section className='dog-card-view'>
+                <div className='detail-toolbar'>
+                    <Link className='action-link action-link--back' to={`/${from}`}>
+                        <span aria-hidden='true'>←</span> Back to {from}
+                    </Link>
+                </div>
                 <DogDetails dogBreedData={dogBreedData}/>
-            </>
+            </section>
         )
     }
 }

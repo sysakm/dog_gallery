@@ -15,15 +15,19 @@ function SelectPage() {
     }, [dispatch, status])
 
     if (status === 'idle' || status === 'loading') {
-        return <p>Loading...</p>
+        return <p className='state-message state-message--loading'>Loading...</p>
     } else if (status === 'error') {
-        return <p><strong>{error}</strong></p>
+        return <p className='state-message state-message--error'><strong>{error}</strong></p>
     } else {
         return (
-            <>
-                <h2>Selection gallery</h2>
+            <section className='page'>
+                <div className='page-heading'>
+                    <p className='page-heading__eyebrow'>Find your match</p>
+                    <h1>Selection gallery</h1>
+                    <p>Choose a breed to inspect its profile without another request.</p>
+                </div>
                 <DogSelect />
-            </>
+            </section>
         )
     }
 }

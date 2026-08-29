@@ -18,27 +18,31 @@ function DogSelect() {
     }
 
     return (
-        <div>
-            <label htmlFor="dog-select">Choose a breed</label>
-            <select value={selected} onChange={(e) => handleSelectDog(e.target.value)}>
-                <option disabled={true} value={''}>
-                    Choose the dog
-                </option>
-                {data?.map(dog => (
-                    <option key={`dog-option-${dog.id}`} value={dog.id}>
-                        {dog.name}
+        <section className='selector-panel'>
+            <div className='selector-control'>
+                <label htmlFor='dog-select'>Choose a breed</label>
+                <select id='dog-select' value={selected} onChange={(e) => handleSelectDog(e.target.value)}>
+                    <option disabled={true} value={''}>
+                        Choose the dog
                     </option>
-                ))}
-            </select>
+                    {data?.map(dog => (
+                        <option key={`dog-option-${dog.id}`} value={dog.id}>
+                            {dog.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
             {selectedBreed && (
-                <div>
-                    <Link to={`/select/dogcard/${selected}`}>
-                        Open full page
-                    </Link>
+                <div className='selected-breed'>
+                    <div className='detail-toolbar'>
+                        <Link className='action-link' to={`/select/dogcard/${selected}`}>
+                            Open full page <span aria-hidden='true'>→</span>
+                        </Link>
+                    </div>
                     <DogDetails dogBreedData={selectedBreed}/>
                 </div>
             )}
-        </div>
+        </section>
     )
 
 }

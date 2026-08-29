@@ -6,26 +6,26 @@ function FavoritesGallery() {
     const {favoritesList} = useAppSelector(state => state.favorites)
 
     if (favoritesList.length === 0) {
-        return <p>Add some dogs to favorites to see them here!</p>
+        return <p className='state-message'>Add some dogs to favorites to see them here!</p>
     }
     if (status !== 'success' || !data) {
-        return <p>Can not display gallery currently</p>
+        return <p className='state-message'>Can not display gallery currently</p>
     }
 
     const currentData = data.filter(dog => !!favoritesList.find(id => id === dog.id))
 
     if (currentData.length === 0) {
-        return <p>No saved breeds were found in the current data</p>
+        return <p className='state-message'>No saved breeds were found in the current data</p>
     }
 
     return (
-        <div>
-            <div>
-                {currentData.map(dog => (
-                    <DogGalleryEntry key={`dog-picture-${dog.id}`} from='home' dog={dog}/>
-                ))}
+        <section className='gallery-section' aria-label='Favorite dog breeds'>
+            <div className='dog-grid'>
+            {currentData.map(dog => (
+                <DogGalleryEntry key={`dog-picture-${dog.id}`} from='home' dog={dog}/>
+            ))}
             </div>
-        </div>
+        </section>
     )
 }
 

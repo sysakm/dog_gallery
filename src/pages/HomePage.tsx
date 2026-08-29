@@ -16,10 +16,14 @@ function HomePage() {
     }, [dispatch, status, favoritesList])
 
     return (
-        <>
-            <h2>Home page</h2>
+        <section className='page'>
+            <div className='page-heading'>
+                <p className='page-heading__eyebrow'>Your saved collection</p>
+                <h1>Favorite breeds</h1>
+                <p>The dogs marked with a heart appear here.</p>
+            </div>
             <FavoritesGallery/>
-        </>
+        </section>
     )
 }
 
