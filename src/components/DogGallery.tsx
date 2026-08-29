@@ -1,9 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
-import DogSmallCard from "./DogSmallCard.tsx";
+import DogGalleryEntry from "./DogGalleryEntry.tsx";
 import {changePageAction} from "../features/gallery/galleryActions.ts";
-import {useState} from "react";
-import {Link} from "react-router-dom";
-import DogDetails from "./DogDetails.tsx";
 
 const DOGS_PER_PAGE = 20
 const BUTTON_INTERVAL = 2
@@ -22,8 +19,6 @@ function DogGallery() {
     const dispatch = useAppDispatch()
     const {pageNum, status, data} = useAppSelector(state => state.gallery)
 
-    const [selectedDog, setSelectedDog] = useState<string>('')
-
     if (status !== 'success' || !data) {
         return <p>Can not display gallery currently</p>
     }
@@ -39,30 +34,8 @@ function DogGallery() {
         dispatch(changePageAction(pageNum))
     }
 
-    const selectedBreed = data.find(dog => dog.id === selectedDog)
-
     return (
         <div>
-            <div>
-                <select value={selectedDog} onChange={(e) => setSelectedDog(e.target.value)}>
-                    <option disabled={true} value={''}>
-                        Choose the dog
-                    </option>
-                    {data.map(dog => (
-                        <option key={`dog-option-${dog.id}`} value={dog.id}>
-                            {dog.name}
-                        </option>
-                    ))}
-                </select>
-                {selectedBreed && (
-                    <>
-                        <DogDetails dogBreedData={selectedBreed}/>
-                        <Link to={`/dogcard/${selectedDog}`}>
-                            Open full page
-                        </Link>
-                    </>
-                )}
-            </div>
             <h2>Full gallery</h2>
             <div>
                 {Math.min(...buttonNumberArray) > 1 && <>
@@ -98,7 +71,7 @@ function DogGallery() {
             </div>
             <div>
                 {currentData.map(dog => (
-                    <DogSmallCard key={`dog-picture-${dog.id}`} dog={dog}/>
+                    <DogGalleryEntry key={`dog-picture-${dog.id}`} dog={dog}/>
                 ))}
             </div>
         </div>

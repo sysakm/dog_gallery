@@ -6,10 +6,10 @@ type Props = {
     dog: DogBreed
 }
 
-function DogSmallCard({dog}: Props) {
+function DogGalleryEntry({dog}: Props) {
     return (
         <div>
-            <Link to={'/dogcard/' + dog.id}>
+            <Link to={'/gallery/dogcard/' + dog.id}>
                 <h5>#{dog.id} {dog.name} (group {dog.breedGroup})</h5>
                 <DogImage src={dog.mainImageUrl} name={dog.name}/>
             </Link>
@@ -17,4 +17,4 @@ function DogSmallCard({dog}: Props) {
     )
 }
 
-export default DogSmallCard
+export default DogGalleryEntry
