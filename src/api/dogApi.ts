@@ -19,14 +19,16 @@ function formatValue(value: string | undefined) {
 }
 
 function formatMetricRange(value: string | undefined, unit: string) {
-    return value?.trim() ? value.trim() + ' ' + unit : 'No data'
+    return value?.trim() ? (
+        value.trim().endsWith(unit) ? value.trim() : value.trim() + ' ' + unit
+    ) : 'No data'
 }
 
 function mapBreed(breed: TheDogApiBreed): DogBreed {
     return {
         id: String(breed.id),
         name: breed.name,
-        description: formatValue(breed.description),
+        description: formatValue(breed.description ?? breed.bred_for),
         history: formatValue(breed.history),
         origin: formatValue(breed.origin),
         breedGroup: formatValue(breed.breed_group),

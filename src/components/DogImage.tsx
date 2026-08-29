@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 type Props = {
     src: string | null;
@@ -6,13 +6,9 @@ type Props = {
 }
 
 function DogImage({src, name}: Props) {
-    const [imageFailed, setImageFailed] = useState(false)
+    const [failedSrc, setFailedSrc] = useState<string | null>(null)
 
-    useEffect(() => {
-        setImageFailed(false)
-    }, [src])
-
-    const showPlaceholder = !src || imageFailed
+    const showPlaceholder = !src || failedSrc === src
     const initial = name.trim().charAt(0).toUpperCase() || '?'
 
     return (
@@ -30,7 +26,7 @@ function DogImage({src, name}: Props) {
                     src={src}
                     alt={name}
                     loading="lazy"
-                    onError={() => setImageFailed(true)}
+                    onError={() => setFailedSrc(src)}
                 />
             )}
         </div>

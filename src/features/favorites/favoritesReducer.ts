@@ -15,6 +15,9 @@ export function favoritesReducer(
 ): FavoritesState {
     switch (action.type) {
         case ADD_TO_FAVORITES:
+            if (state.favoritesList.includes(action.payload)) {
+                return state
+            }
             return {...state, favoritesList: [...state.favoritesList, action.payload]}
         case REMOVE_FROM_FAVORITES:
             return {...state, favoritesList: state.favoritesList.filter(id => id !== action.payload)}

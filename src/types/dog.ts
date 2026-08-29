@@ -18,6 +18,7 @@ export type TheDogApiBreed = {
     id: number;
     name: string;
     description?: string;
+    bred_for?: string;
     history?: string;
     breed_group?: string;
     life_span?: string;

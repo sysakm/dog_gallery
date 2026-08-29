@@ -22,6 +22,9 @@ function DogGallery() {
     if (status !== 'success' || !data) {
         return <p>Can not display gallery currently</p>
     }
+    if (data.length === 0) {
+        return <p>No breeds were returned.</p>
+    }
 
     const totalPages = Math.ceil(data.length / DOGS_PER_PAGE)
     const currentData = data.slice(

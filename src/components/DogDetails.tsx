@@ -15,7 +15,7 @@ function DogDetails({dogBreedData}: Props) {
             <h3>{dogBreedData.name} ({dogBreedData.breedGroup})</h3>
             <p>{dogBreedData.description}</p>
             <p>{dogBreedData.temperament}</p>
-            <p>Originates from {dogBreedData.origin}.</p>
+            <p>Originates from {dogBreedData.origin}</p>
             <p>{dogBreedData.history}</p>
             <dl>
                 <dt>Life Span</dt>

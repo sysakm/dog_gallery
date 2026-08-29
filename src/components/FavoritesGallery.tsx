@@ -9,10 +9,14 @@ function FavoritesGallery() {
         return <p>Add some dogs to favorites to see them here!</p>
     }
     if (status !== 'success' || !data) {
-        return <p>Can not display gallery currently - make sure data is loaded.</p>
+        return <p>Can not display gallery currently</p>
     }
 
     const currentData = data.filter(dog => !!favoritesList.find(id => id === dog.id))
+
+    if (currentData.length === 0) {
+        return <p>No saved breeds were found in the current data</p>
+    }
 
     return (
         <div>
