@@ -7,7 +7,7 @@ const dogApi = axios.create({
     baseURL: DOG_API_BASE_URL,
     timeout: 5000,
     headers: {
-        'x-api-key': import.meta.env.VIT_DOG_API_KEY ?? ''
+        'x-api-key': import.meta.env.VITE_DOG_API_KEY ?? ''
     }
 })
 
@@ -16,7 +16,7 @@ function formatValue(value: string | undefined) {
 }
 
 function formatMetricRange(value: string | undefined, unit: string) {
-    return value?.trim() ? value.trim + ' ' + unit : 'No data'
+    return value?.trim() ? value.trim() + ' ' + unit : 'No data'
 }
 
 function mapBreed(breed: TheDogApiBreed): DogBreed {
