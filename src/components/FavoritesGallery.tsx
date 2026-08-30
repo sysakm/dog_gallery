@@ -2,19 +2,21 @@ import {useAppSelector} from "../app/hooks.ts";
 import DogGalleryEntry from "./DogGalleryEntry.tsx";
 
 function FavoritesGallery() {
-    const {status, data} = useAppSelector(state => state.gallery)
+    const {status, data, error} = useAppSelector(state => state.gallery)
     const {favoritesList} = useAppSelector(state => state.favorites)
 
     if (favoritesList.length === 0) {
         return <p className='state-message'>Add some dogs to favorites to see them here!</p>
     }
-    if (status !== 'success' || !data) {
-        return <p className='state-message'>Can not display gallery currently</p>
+    if (status === 'idle' || status === 'loading') {
+        return <p className='state-message state-message--loading'>Loading...</p>
+    } else if (status === 'error') {
+        return <p className='state-message state-message--error'><strong>{error}</strong></p>
     }
 
-    const currentData = data.filter(dog => !!favoritesList.find(id => id === dog.id))
+    const currentData = data?.filter(dog => !!favoritesList.find(id => id === dog.id))
 
-    if (currentData.length === 0) {
+    if (!currentData || currentData.length === 0) {
         return <p className='state-message'>No saved breeds were found in the current data</p>
     }
 

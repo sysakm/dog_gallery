@@ -7,7 +7,7 @@ import DogDetails from "./DogDetails.tsx";
 function DogCard() {
 
     const dispatch = useAppDispatch()
-    const {status, data} = useAppSelector(state => state.gallery)
+    const {status, data, error} = useAppSelector(state => state.gallery)
     const {from, dogId} = useParams()
 
     useEffect(() => {
@@ -16,8 +16,10 @@ function DogCard() {
         }
     }, [status, dispatch])
 
-    if (status !== 'success' || !data) {
-        return <p className='state-message'>Need full dog data loaded to display individual dog profile.</p>
+    if (status === 'idle' || status === 'loading') {
+        return <p className='state-message state-message--loading'>Loading...</p>
+    } else if (status === 'error') {
+        return <p className='state-message state-message--error'><strong>{error}</strong></p>
     }
     if (from !== 'gallery' && from !== 'select' && from !== 'home') {
         return (
@@ -32,7 +34,7 @@ function DogCard() {
         )
     }
 
-    const dogBreedData = data.find(dog => dog.id === dogId)
+    const dogBreedData = data?.find(dog => dog.id === dogId)
     if (!dogBreedData) {
         return <p className='state-message'>Could not find dog with ID {dogId} in data...</p>
     } else {
