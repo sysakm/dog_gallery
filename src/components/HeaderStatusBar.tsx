@@ -13,7 +13,7 @@ const statusMessages: Record<RequestStatus, string> = {
 function HeaderStatusBar() {
 
     const dispatch = useAppDispatch()
-    const {status} = useAppSelector(state => state.gallery)
+    const status = useAppSelector(state => state.gallery.status)
 
     function handleReset() {
         dispatch(resetAction())

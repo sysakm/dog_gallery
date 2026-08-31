@@ -6,7 +6,8 @@ import DogSelect from "../components/DogSelect.tsx";
 function SelectPage() {
 
     const dispatch = useAppDispatch()
-    const {status, error} = useAppSelector(state => state.gallery)
+    const status = useAppSelector(state => state.gallery.status)
+    const error = useAppSelector(state => state.gallery.error)
 
     useEffect(() => {
         if (status === 'idle') {

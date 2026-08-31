@@ -17,7 +17,9 @@ function createCurrentButtons(pageNum: number, totalPages: number): Array<number
 
 function DogGallery() {
     const dispatch = useAppDispatch()
-    const {pageNum, status, data} = useAppSelector(state => state.gallery)
+    const pageNum = useAppSelector(state => state.gallery.pageNum)
+    const status = useAppSelector(state => state.gallery.status)
+    const data = useAppSelector(state => state.gallery.data)
 
     if (status !== 'success' || !data) {
         return <p>Can not display gallery currently</p>

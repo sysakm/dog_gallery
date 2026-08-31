@@ -6,7 +6,8 @@ import DogGallery from "../components/DogGallery.tsx";
 function GalleryPage() {
 
     const dispatch = useAppDispatch()
-    const {status, error} = useAppSelector(state => state.gallery)
+    const status = useAppSelector(state => state.gallery.status)
+    const error = useAppSelector(state => state.gallery.error)
 
     useEffect(() => {
         if (status === 'idle') {

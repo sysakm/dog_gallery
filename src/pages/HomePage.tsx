@@ -6,7 +6,7 @@ import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
 function HomePage() {
 
     const dispatch = useAppDispatch()
-    const {status} = useAppSelector(state => state.gallery)
+    const status = useAppSelector(state => state.gallery.status)
     const {favoritesList} = useAppSelector(state => state.favorites)
 
     useEffect(() => {

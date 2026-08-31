@@ -2,12 +2,21 @@ import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
 import DogDetails from "../components/DogDetails.tsx";
 import {Link} from "react-router-dom";
 import {changeSelectedAction} from "../features/gallery/galleryActions.ts";
+import {useMemo} from "react";
 
 function DogSelect() {
 
     const dispatch = useAppDispatch()
     const {selected, status, data} = useAppSelector(state => state.gallery)
     const selectedBreed = data?.find(dog => dog.id === selected)
+
+    const breedOptions = useMemo(() => {
+        return data?.map(dog => (
+            <option key={`dog-option-${dog.id}`} value={dog.id}>
+                {dog.name}
+            </option>
+        )) ?? []
+    }, [data])
 
     function handleSelectDog(newSelected: string) {
         dispatch(changeSelectedAction(newSelected))
@@ -25,11 +34,7 @@ function DogSelect() {
                     <option disabled={true} value={''}>
                         Choose the dog
                     </option>
-                    {data?.map(dog => (
-                        <option key={`dog-option-${dog.id}`} value={dog.id}>
-                            {dog.name}
-                        </option>
-                    ))}
+                    {breedOptions}
                 </select>
             </div>
             {selectedBreed && (
