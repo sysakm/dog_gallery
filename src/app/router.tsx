@@ -8,7 +8,7 @@ import NotFoundPage from "../pages/NotFoundPage.tsx";
 import {store} from "./store.ts";
 import {requestGalleryData} from "../features/gallery/galleryThunks.ts";
 
-async function galleryLoader() {
+function galleryLoader() {
     const status = store.getState().gallery.status
     if (status === 'idle') {
         void store.dispatch(requestGalleryData())
@@ -16,7 +16,7 @@ async function galleryLoader() {
     return null
 }
 
-async function favoritesLoader() {
+function favoritesLoader() {
     const status = store.getState().gallery.status
     const anyFavorites = store.getState().favorites.favoritesList.length > 0
     if (status === 'idle' && anyFavorites) {
