@@ -1,19 +1,9 @@
-import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
-import {requestGalleryData} from "../features/gallery/galleryThunks.ts";
-import {useEffect} from "react";
+import {useAppSelector} from "../app/hooks.ts";
 import DogSelect from "../components/DogSelect.tsx";
 
 function SelectPage() {
-
-    const dispatch = useAppDispatch()
     const status = useAppSelector(state => state.gallery.status)
     const error = useAppSelector(state => state.gallery.error)
-
-    useEffect(() => {
-        if (status === 'idle') {
-            void dispatch(requestGalleryData())
-        }
-    }, [dispatch, status])
 
     if (status === 'idle' || status === 'loading') {
         return <p className='state-message state-message--loading'>Loading...</p>

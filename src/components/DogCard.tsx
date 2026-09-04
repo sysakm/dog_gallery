@@ -1,20 +1,10 @@
-import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
+import {useAppSelector} from "../app/hooks.ts";
 import {Link, useParams} from "react-router-dom";
-import {useEffect} from "react";
-import {requestGalleryData} from "../features/gallery/galleryThunks.ts";
 import DogDetails from "./DogDetails.tsx";
 
 function DogCard() {
-
-    const dispatch = useAppDispatch()
     const {status, data, error} = useAppSelector(state => state.gallery)
     const {from, dogId} = useParams()
-
-    useEffect(() => {
-        if (status === 'idle') {
-            void dispatch(requestGalleryData())
-        }
-    }, [status, dispatch])
 
     if (status === 'idle' || status === 'loading') {
         return <p className='state-message state-message--loading'>Loading...</p>

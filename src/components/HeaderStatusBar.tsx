@@ -2,6 +2,7 @@ import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
 import {resetAction} from "../features/gallery/galleryActions.ts";
 import {requestGalleryData} from "../features/gallery/galleryThunks.ts";
 import type {RequestStatus} from "../types/dog.ts";
+import {useRevalidator} from "react-router-dom";
 
 const statusMessages: Record<RequestStatus, string> = {
     idle: 'Gallery data is ready to load.',
@@ -11,12 +12,13 @@ const statusMessages: Record<RequestStatus, string> = {
 }
 
 function HeaderStatusBar() {
-
+    const {revalidate} = useRevalidator()
     const dispatch = useAppDispatch()
     const status = useAppSelector(state => state.gallery.status)
 
     function handleReset() {
         dispatch(resetAction())
+        void revalidate()
     }
     function handleForceLoad() {
         void dispatch(requestGalleryData())
