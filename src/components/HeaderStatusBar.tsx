@@ -17,8 +17,10 @@ function HeaderStatusBar() {
     const status = useAppSelector(state => state.gallery.status)
 
     function handleReset() {
-        dispatch(resetAction())
-        void revalidate()
+        if (status !== 'loading') {
+            dispatch(resetAction())
+            void revalidate()
+        }
     }
     function handleForceLoad() {
         void dispatch(requestGalleryData())
@@ -38,7 +40,9 @@ function HeaderStatusBar() {
                     Load data
                 </button>
             ) : (
-                <button className='status-bar__action status-bar__action--quiet' type='button' onClick={handleReset}>
+                <button className='status-bar__action status-bar__action--quiet'
+                        type='button' onClick={handleReset} disabled={status === 'loading'}
+                >
                     Reset the data
                 </button>
             )}
